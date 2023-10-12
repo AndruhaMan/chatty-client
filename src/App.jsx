@@ -1,11 +1,11 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { HashRouter, Route, Routes } from 'react-router-dom';
 import socketIO from 'socket.io-client';
 import { Login } from './components/Login';
 import './App.scss';
 import { ChatPage } from './components/ChatPage';
 import { Header } from './components/Header';
 
-const socket = socketIO.connect('http://localhost:4000');
+const socket = socketIO.connect('https://andruhaman.github.io/web-basics-lab4-server:443');
 
 
 export const App = () => {
@@ -14,12 +14,12 @@ export const App = () => {
       <Header />
 
       <main className='main'>
-        <BrowserRouter>
+        <HashRouter>
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/chat" element={<ChatPage socket={socket} />} />
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
       </main>
     </>
   );
