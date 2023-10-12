@@ -5,7 +5,7 @@ import './App.scss';
 import { ChatPage } from './components/ChatPage';
 import { Header } from './components/Header';
 
-const socket = socketIO.connect('https://andruhaman.github.io/web-basics-lab4-server:443');
+const socket = socketIO.connect('https://web-basics-lab4-server.onrender.com/');
 
 
 export const App = () => {
