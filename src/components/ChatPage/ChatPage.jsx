@@ -9,7 +9,8 @@ export const ChatPage = ({ socket }) => {
   const lastMessageRef = useRef(null);
 
   useEffect(() => {
-    fetch('http://localhost:4000/messages')
+    // fetch('http://localhost:4000/messages')
+    fetch('https://web-basics-lab4-server.onrender.com/messages')
       .then(res => res.json())
       .then(fetchedMessages => setMessages(current => [...fetchedMessages, ...current]))
       .then(() => console.log(messages));
