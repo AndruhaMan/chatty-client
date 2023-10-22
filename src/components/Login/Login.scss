@@ -1,11 +1,7 @@
-.Login {
-  &__form {
-    // width: 100%;
-  }
-}
-
 .form-login {
   position: relative;
+  border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 15px;
 
   &__input {
     width: 100%;
@@ -31,5 +27,6 @@
     background-size: 20px;
     background-repeat: no-repeat;
     background-position: center;
+    cursor: pointer;
   }
 }

@@ -9,7 +9,7 @@
 
   &__messages {
     overflow-y: scroll;
-    padding: 15px;
+    padding: 20px;
 
     &::-webkit-scrollbar {
       display: none;
@@ -19,7 +19,7 @@
 
 .form {
   position: relative;
-  border-radius: 50%;
+  border-radius: 20px;
   box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 15px;
 
   &__input {
@@ -54,6 +54,7 @@
   padding: 5px;
   margin-top: 10px;
   width: fit-content;
+  min-width: 80px;
   max-width: 70%;
   border-radius: 10px;
   border-bottom-left-radius: 0px;
@@ -72,6 +73,8 @@
   }
 
   &__user {
+    font-size: 12px;
+
     &::after {
       content: "";
       width: 100%;
@@ -86,5 +89,6 @@
     display: block;
     margin-right: 0;
     margin-left: auto;
+    font-size: 12px;
   }
 }

@@ -2,15 +2,19 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.scss';
 
-export const Login = () => {
+export const Login = ({ socket }) => {
   const navigate = useNavigate();
   const [userName, setUserName] = useState('');
 
   const handleSubmit = (e) => {
+    e.preventDefault();
+
     if (userName.trim()) {
-      e.preventDefault();
-      sessionStorage.setItem('userName', userName);
-      navigate('/chat');
+      socket.emit('enterName', userName, (response) => {
+        response.status === 'ok' &&
+          navigate('/chat');
+      })
+      
     }
   }
 

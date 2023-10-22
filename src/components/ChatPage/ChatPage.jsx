@@ -7,10 +7,20 @@ export const ChatPage = ({ socket }) => {
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
   const lastMessageRef = useRef(null);
-  const userName = sessionStorage.getItem('userName');
 
   useEffect(() => {
-    socket.on('messageResponse', (data) => setMessages([...messages, data]));
+    fetch('http://localhost:4000/messages')
+      .then(res => res.json())
+      .then(fetchedMessages => setMessages(current => [...fetchedMessages, ...current]))
+      .then(() => console.log(messages));
+  }, []);
+
+  useEffect(() => {
+    socket.once('messageHistory', (data) => setMessages(data));
+  }, [socket]);
+  
+  useEffect(() => {
+    socket.once('messageResponse', (data) => setMessages([...messages, data]));
   }, [socket, messages]);
 
   useEffect(() => {
@@ -19,12 +29,10 @@ export const ChatPage = ({ socket }) => {
 
   const handleSendMessage = (e) => {
     e.preventDefault();
-    if (message.trim() && userName) {
+    if (message.trim()) {
       socket.emit('message', {
         text: message,
-        name: userName,
         time: new Date().toLocaleTimeString(),
-        id: `${socket.id}${Math.random()}`,
         socketID: socket.id,
       });
     }
@@ -34,15 +42,15 @@ export const ChatPage = ({ socket }) => {
   return (
     <div className="ChatPage">
       <div className="ChatPage__messages">
-        {messages.map((message) => (
+        {messages.map(message => (
           <div
             className={cn(
               "message",
-              { "message--outcoming": message.name === userName },
+              { "message--outcoming": message.socketID === socket.id },
             )}
             key={message.id}
           >
-            {message.name !== userName && (
+            {message.socketID !== socket.id && (
               <span className="message__user">
                 {message.name}
               </span>
